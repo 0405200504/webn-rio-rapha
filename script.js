@@ -79,8 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       4. MODAL DE CAPTURA (POPUP) E FLUXO DE INSCRIÇÃO
+       4. MODAL DE CAPTURA (POPUP) E FLUXO DE INSCRIÇÃO / GOOGLE SHEETS
        ========================================================================== */
+    // IMPORTANTE: Cole abaixo a URL do Web App gerada no Google Apps Script
+    const GOOGLE_SHEETS_WEBHOOK_URL = "COLE_SUA_URL_DO_WEB_APP_AQUI";
+
     const openPopupBtns = document.querySelectorAll('.open-popup-btn');
     const captureModal = document.getElementById('capture-modal');
     const closeModalBtn = document.getElementById('close-modal');
@@ -170,6 +173,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     progressBar.style.width = '100%';
                 }, 50);
+
+                // Enviar dados para o Google Sheets em segundo plano
+                const formData = new FormData(popupForm);
+                
+                if (GOOGLE_SHEETS_WEBHOOK_URL && GOOGLE_SHEETS_WEBHOOK_URL !== "COLE_SUA_URL_DO_WEB_APP_AQUI") {
+                    fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log('Sucesso no envio para o Google Sheets:', data))
+                    .catch(error => console.error('Erro ao enviar para o Google Sheets:', error));
+                } else {
+                    console.warn('URL do Google Sheets Webhook não configurada. Simulando envio local.');
+                }
 
                 // Após 4 segundos, exibir mensagem final
                 setTimeout(() => {
