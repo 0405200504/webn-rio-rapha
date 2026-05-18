@@ -112,7 +112,7 @@ button, input, textarea {
     align-items: center;
     padding: var(--space-lg) 0 var(--space-xl) 0;
     position: relative;
-    background-image: url('imagens/sessão1.png');
+    background-image: url('imagens/hero.jpg?v=3');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -914,7 +914,7 @@ button, input, textarea {
 @media (max-width: 768px) {
     .hero {
         padding: 360px 0 var(--space-lg) 0;
-        background-image: url('imagens/sessão1.png');
+        background-image: url('imagens/hero.jpg?v=3');
         background-size: 100% auto;
         background-position: top center;
         background-repeat: no-repeat;
