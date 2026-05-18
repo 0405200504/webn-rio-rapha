@@ -165,7 +165,7 @@ function doPost(e) {
        ========================================================================== */
 
     // IMPORTANTE: Cole abaixo a URL do Web App gerada no Google Apps Script
-    const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx3ZKuQ8PK0eOSLGg8gLvbVQR1pMsGItS17QVCmFYledXXXBRZNhBmRd1Swsvdp01wc2w/exec";
+    const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwXzdnnh8yxghs47oqJkftTdUlZi7nZBJBPg6SbvxbMvYuYQvueuuMHLX2I2-2GCrCwcw/exec";
 
     const openPopupBtns = document.querySelectorAll('.open-popup-btn');
     const captureModal = document.getElementById('capture-modal');
