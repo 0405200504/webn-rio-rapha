@@ -924,7 +924,7 @@ button, input, textarea {
         padding: 360px 0 var(--space-lg) 0;
         background-image: url('imagens/hero.jpg?v=3');
         background-size: 100% auto;
-        background-position: center -45px;
+        background-position: center top;
         background-repeat: no-repeat;
     }
 
