@@ -252,6 +252,12 @@ function doPost(e) {
                 loadingBox.classList.remove('hidden');
                 successBox.classList.add('hidden');
                 
+                // Disparar evento de conversão de Lead no Meta Pixel
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Lead');
+                    console.log('Evento Meta Pixel Lead disparado com sucesso.');
+                }
+                
                 // Iniciar animação da barra de progresso (4 segundos)
                 setTimeout(() => {
                     progressBar.style.width = '100%';
