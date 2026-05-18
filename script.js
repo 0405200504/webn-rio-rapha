@@ -80,7 +80,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
        4. MODAL DE CAPTURA (POPUP) E FLUXO DE INSCRIÇÃO / GOOGLE SHEETS
+       ==========================================================================
+       
+       GUIA DE CONFIGURAÇÃO DA PLANILHA DE LEADS (GOOGLE SHEETS)
+       --------------------------------------------------------------------------
+       Para que os leads preenchidos no site sejam salvos automaticamente e a 
+       sua planilha fique com um visual premium e perfeitamente organizada, 
+       siga o passo a passo abaixo:
+
+       PASSO 1:
+       Crie uma nova planilha no Google Sheets (ex: "Leads - Webinário Raphael Pereira").
+
+       PASSO 2:
+       No menu superior do Google Sheets, clique em: Extensões > Apps Script.
+
+       PASSO 3:
+       Apague qualquer código que estiver no editor e cole o script completo abaixo:
+
+// --- INÍCIO DO CÓDIGO DO APPS SCRIPT (Copie e cole no Google Sheets) ---
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // 1. Configuração e Formatação Automática da Planilha (Deixa a planilha linda e organizada)
+    if (sheet.getLastRow() === 0) {
+      // Cria o cabeçalho se a planilha estiver vazia
+      var cabecalho = ["Data/Hora", "Nome", "WhatsApp", "E-mail"];
+      sheet.appendRow(cabecalho);
+      
+      // Formatação Premium do Cabeçalho (Estética da Marca: Fundo Escuro, Letra Laranja)
+      var rangeCabecalho = sheet.getRange(1, 1, 1, 4);
+      rangeCabecalho.setBackground("#0B0B0B")
+                    .setFontColor("#FF6A00")
+                    .setFontWeight("bold")
+                    .setHorizontalAlignment("center")
+                    .setFontFamily("Arial");
+      
+      // Congela a primeira linha para o cabeçalho ficar fixo ao rolar a planilha
+      sheet.setFrozenRows(1);
+    }
+    
+    // 2. Captura e Tratamento dos Dados do Lead
+    var nome = e.parameter.nome || "Não informado";
+    var whatsapp = e.parameter.whatsapp || "Não informado";
+    var email = e.parameter.email || "Não informado";
+    var dataHora = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    
+    // 3. Inserção dos Dados na Planilha
+    sheet.appendRow([dataHora, nome, whatsapp, email]);
+    
+    // 4. Ajuste Automático do Tamanho das Colunas para não cortar nenhum texto
+    sheet.autoResizeColumns(1, 4);
+    
+    // 5. Alinhamento dos Dados Inseridos (Data centralizada, restante à esquerda)
+    var ultimaLinha = sheet.getLastRow();
+    sheet.getRange(ultimaLinha, 1).setHorizontalAlignment("center");
+    sheet.getRange(ultimaLinha, 2, 1, 3).setHorizontalAlignment("left");
+
+    // Retorna sucesso para o site
+    return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ "result": "error", "error": error.toString() }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+// --- FIM DO CÓDIGO DO APPS SCRIPT ---
+
+       PASSO 4:
+       No Apps Script, clique no ícone de disquete (Salvar).
+
+       PASSO 5:
+       Clique no botão azul "Implantar" (Deploy) no canto superior direito > "Nova implantação".
+       - Selecione o tipo: "App da Web" (Web App).
+       - Descrição: Webhook Leads
+       - Executar como: "Eu"
+       - Quem pode acessar: "Qualquer pessoa" (Anyone) -> IMPORTANTE: Tem que ser "Qualquer pessoa".
+
+       PASSO 6:
+       Clique em "Implantar", autorize as permissões do Google e copie a "URL do App da Web".
+
+       PASSO 7:
+       Cole a URL copiada dentro das aspas da constante GOOGLE_SHEETS_WEBHOOK_URL abaixo:
        ========================================================================== */
+
     // IMPORTANTE: Cole abaixo a URL do Web App gerada no Google Apps Script
     const GOOGLE_SHEETS_WEBHOOK_URL = "COLE_SUA_URL_DO_WEB_APP_AQUI";
 
