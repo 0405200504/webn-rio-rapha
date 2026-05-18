@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('appear');
-                // Optional: Stop observing once animation has triggered
-                // observer.unobserve(entry.target);
+                // Otimização de Performance: Para de observar o elemento após a animação para poupar CPU
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);

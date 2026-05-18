@@ -7,18 +7,19 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="aula gratuita ao vivo no dia 20/05 às 19h. vou te mostrar como criar uma saída para o estoque parado da sua marca e vender as próximas coleções com mais margem.">
+    <meta name="theme-color" content="#0B0B0B">
     
     <!-- Google Fonts & Webhook Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://script.google.com" crossorigin>
     <link rel="dns-prefetch" href="https://script.google.com">
+    
+    <!-- Preload Hero Image (LCP Prioridade Máxima) -->
+    <link rel="preload" as="image" href="imagens/hero.jpg?v=3" fetchpriority="high">
+    
+    <!-- Fontes e CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Preload Hero Image -->
-    <link rel="preload" as="image" href="imagens/hero.jpg?v=3">
-    
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -100,7 +101,7 @@
             
             <!-- IMAGEM CONCEITUAL: ESTOQUE PARADO -->
             <div class="editorial-image-wrapper mb-lg">
-                <img src="imagens/estoque.jpg" alt="Estoque parado de marca de roupa" class="editorial-img" loading="lazy" decoding="async">
+                <img src="imagens/estoque.jpg" alt="Estoque parado de marca de roupa" class="editorial-img" width="1080" height="1350" loading="lazy" decoding="async" fetchpriority="low">
             </div>
 
             <button class="cta-button open-popup-btn inline-block">
@@ -176,7 +177,7 @@
         <div class="container narrow fade-up">
             <!-- FOTO DO MENTOR -->
             <div class="mentor-image-wrapper mb-lg">
-                <img src="imagens/mentor.jpg?v=3" alt="Raphael Pereira - Mentor e fundador da AGED Arquive" class="mentor-img" loading="lazy" decoding="async">
+                <img src="imagens/mentor.jpg?v=3" alt="Raphael Pereira - Mentor e fundador da AGED Arquive" class="mentor-img" width="1080" height="1440" loading="lazy" decoding="async" fetchpriority="low">
             </div>
 
             <h2 class="section-headline">por que eu vou falar sobre isso?</h2>

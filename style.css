@@ -102,6 +102,12 @@ button, input, textarea {
     padding: var(--space-xl) 0;
 }
 
+/* Otimização de Renderização (Core Web Vitals): Pula cálculo de layout de seções fora da tela */
+.pain-section, .pillars-section, .learning-section, .authority-section, .target-section, .belief-section, .cta-section, .faq-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
 /* ==========================================================================
    HERO / PRIMEIRA DOBRA
    ========================================================================== */
@@ -622,6 +628,7 @@ button, input, textarea {
 
 .fade-in {
     opacity: 0;
+    will-change: opacity;
     transition: opacity 0.8s ease;
 }
 
@@ -631,13 +638,14 @@ button, input, textarea {
 
 .fade-up {
     opacity: 0;
-    transform: translateY(30px);
+    will-change: transform, opacity;
+    transform: translate3d(0, 30px, 0);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .fade-up.appear {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
 }
 
 /* ==========================================================================
